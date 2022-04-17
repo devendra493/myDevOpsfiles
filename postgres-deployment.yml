@@ -26,19 +26,19 @@ spec:
           env:
             - name: POSTGRES_USER
               valueFrom:
-                SecretKeyRef:
+                secretKeyRef:
                   name: postgres-secret
                   key: username
             - name: POSTGRES_PASSWORD
-                valueFrom:
-                  SecretKeyRef:
-                    name: postgres-secret
-                    key: password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
             - name: POSTGRES_DB
-                valueFrom:
-                  SecretKeyRef:
-                    name: postgres-secret
-                    key: db
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db
 
 
 ...
