@@ -2,25 +2,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-def
+  name: sql-server
   labels:
     author: Devendra
-    type: nginx-server
+    type: sql-server
 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      type: nginx-server
-  template:
+      type: sql-server
+  template: 
     metadata:
-      name: nginx-pod
+      name: sql-server-pod
       labels:
         author: Devendra
-        type: nginx-server
+        type: sql-server
     spec:
       containers:
-        - name: my-nginx
-          image: nginx
+        - name: my-sql-server
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+                #SecretKeyRef:
+                  # name: mysql-secret
+                  # key: password
+
 
 ...
