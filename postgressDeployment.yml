@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-server
+  labels:
+    author: Devendra
+    type: db-server
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: db-server
+  template:
+
+    metadata:
+      name: db-server-pod
+      labels:
+        author: Devendra
+        type: db-server
+    spec:
+      containers:
+        - name: my-db-server
+          image: postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                SecretKeyRef:
+                  name: postgres-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+                valueFrom:
+                  SecretKeyRef:
+                    name: postgres-secret
+                    key: password
+            - name: POSTGRES_DB
+                valueFrom:
+                  SecretKeyRef:
+                    name: postgres-secret
+                    key: db
+
+
+...
