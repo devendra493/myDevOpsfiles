@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-def
+  labels:
+    author: Devendra
+    type: nginx-server
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: nginx-server
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        author: Devendra
+        type: nginx-server
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx
+
+...
