@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    disktype: ssd
+
+
+---
+#Another way - Directly giving node name
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: foo-node # schedule pod to specific node
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent

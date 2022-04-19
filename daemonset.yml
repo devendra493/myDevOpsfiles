@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  labels:
+    author: Devendra
+    type: daemonset
+  annotations:
+    info: this is test daemonset file
+
+spec:
+  selector:
+    matchLabels:
+      type: daemonset
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        author: Devendra
+        tye: daemonse
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              hostPort: 8082
+
+...
