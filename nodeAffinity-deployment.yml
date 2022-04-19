@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: my-affinity-dep
+    labels:
+      author: Devendra
+      type: centos
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: centos
+  template:
+    metadata:
+      name: my-centos-pod
+      labels:
+        author: Devendra
+        type: centos
+    spec:
+      containers:
+        - name: my-centos-cont
+          image: centos
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+              - matchExpressions:
+                 - key: slave1
+                   values:
+                    - myname
+                   operator: In
+
+...
