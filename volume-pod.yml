@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: my-jenkins
+    labels:
+      author: Devendra
+      type: jenkins
+spec:
+  containers:
+    - name: my-jenkins-cont
+      image: jenkins/jenkins
+      ports:
+        - containerPort: 8080
+          hostPort: 8081
+      volumeMounts:
+        - name: myvolume
+          mountPath: /mydata
+
+  volumes:
+    - name: myvolume
+      emptyDir: {}
+
+...
+        
