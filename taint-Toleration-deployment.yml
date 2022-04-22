@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-server-deployment
+  labels:
+    author: Devendra
+    type: server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: server
+  template:
+    metadata:
+      name: my-server-pod
+      labels:
+        author: Devendra
+        type: server
+    spec:
+      containers:
+        - name: my-comtainer
+          image: tomee
+    tolerations:
+        - key: slave2
+          value: t2
+          operator: Equal
+          effect: NoSchedule
+        -  key: slave3
+          value: t3
+          operator: Equal
+          effect: NoExecute
+
+
+
+...

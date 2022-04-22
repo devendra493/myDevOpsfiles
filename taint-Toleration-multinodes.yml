@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: my-affinity-dep
+    labels:
+      author: Devendra
+      type: nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      type: nginx
+  template:
+    metadata:
+      name: my-nginx-pod
+      labels:
+        author: Devendra
+        type: nginx
+    spec:
+      containers:
+        - name: my-nginx-cont
+          image: nginx
+      tolerations:
+        - key: slave2
+          value: myslave
+          operator: In
+          effect: NoSchedule
+
+
+...
